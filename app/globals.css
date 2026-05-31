@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  /* Cyberpunk/Synthwave Color Palette */
+  --color-primary: #0D0A1A; /* Warna dasar/latar belakang gelap (Dark Purple Neo). */
+  --color-accent-1: #7F57FF; /* Warna aksen utama (Cyber Purple), digunakan untuk hover dan elemen aktif. */
+  --color-accent-2: #FF4FAD; /* Warna aksen sekunder (Neon Pink), digunakan untuk logo dan judul utama. */
+  --color-text: #EDEDED; /* Warna teks utama, terang. */
+  --color-text-soft: #B0B0B0; /* Warna teks sekunder/lunak. */
+
+  /* Shadow Glows based on new accents */
+  --shadow-glow-purple: 0 0 10px #7F57FF; /* Efek cahaya (glow) ungu. */
+  --shadow-glow-pink: 0 0 10px #FF4FAD; /* Efek cahaya (glow) pink. */
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-primary);
+  font-family: "Poppins", serif;
+  height: 100%;
+  min-height: 100vh;
+}
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  .animate-scroll {
+    animation: scroll 40s linear infinite;
+  }
+}

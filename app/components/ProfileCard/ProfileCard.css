@@ -1,0 +1,246 @@
+.pc-card-wrapper {
+  --inner-gradient: linear-gradient(145deg, #60496e8c 0%, #71c4ff44 100%);
+  --behind-glow-color: rgba(125, 190, 255, 0.67);
+  --behind-glow-size: 50%;
+  --icon: none;
+  --grain: none;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.pc-behind {
+  position: absolute;
+  inset: -50%;
+  background-image: radial-gradient(
+    var(--behind-glow-size) var(--behind-glow-size) at var(--pointer-x)
+      var(--pointer-y),
+    var(--behind-glow-color),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.pc-card-shell.active .pc-behind {
+  opacity: 1;
+}
+
+.pc-card-shell {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+
+.pc-card-shell.entering {
+  transition: transform 180ms ease-out;
+}
+
+.pc-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--inner-gradient), #1a1a1a;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform-style: preserve-3d;
+  transform: translateZ(var(--translate-z, 0px));
+}
+
+.pc-inside {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  color: white;
+  transform-style: preserve-3d;
+}
+
+.pc-shine {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at var(--pointer-x) var(--pointer-y),
+    rgba(255, 255, 255, 0.2),
+    transparent 40%
+  );
+  opacity: var(--pointer-from-center, 0);
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pc-glare {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    ellipse 100% 100% at var(--pointer-x) 150%,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  opacity: var(--pointer-from-center, 0);
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.pc-content {
+  position: relative;
+  z-index: 4;
+  transform: translateZ(20px);
+}
+
+.pc-avatar-content {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  display: block;
+}
+
+/* New styles for full-card avatar */
+.pc-avatar-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  border: none;
+  z-index: 0;
+  filter: brightness(0.7); /* Optional: darken the image a bit */
+}
+
+.pc-user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* New styles for overlayed user info */
+.pc-user-info-overlay {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  width: auto;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pc-user-details {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pc-mini-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.pc-user-text {
+  line-height: 1.2;
+}
+
+.pc-handle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pc-status {
+  font-size: 0.8rem;
+  color: #4ade80; /* Green for Online */
+}
+
+.pc-contact-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pc-contact-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.pc-contact-btn:empty {
+  display: none;
+}
+
+.pc-details {
+  margin-top: 1rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.pc-details h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.pc-details p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0.25rem 0 0;
+}
+
+/* Hide original name/title if user info is shown as an overlay */
+.pc-user-info-overlay ~ .pc-content .pc-details {
+  display: none;
+}
+
+/* Adjustments for when user info is NOT shown */
+.pc-inside:not(:has(.pc-user-info)) {
+  justify-content: flex-end;
+}
+
+.pc-inside:not(:has(.pc-user-info)) .pc-details {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
